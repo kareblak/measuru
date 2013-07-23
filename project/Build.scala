@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 import scala.Some
-import com.typesafe.startscript.StartScriptPlugin
+import com.typesafe.sbt.SbtStartScript
 
 object Build extends Build {
 
@@ -17,21 +17,20 @@ object Build extends Build {
         version             := Settings.version,
         homepage            := Settings.homepage,
         licenses            := Settings.licenses,
-        pomExtra            := Settings.pomExtra,
         libraryDependencies ++= External.libraryDependencies,
         resolvers           ++= External.resolvers
     )
-    ++ seq(StartScriptPlugin.startScriptForClassesSettings: _*)
+    ++ seq(SbtStartScript.startScriptForClassesSettings: _*)
   )
 
   object Settings {
-    val name = "brewpot"
-    val description = "Brewpot"
-    val scalaVersion = "2.10.0"
-    val organization = "org.brewpot"
+    val name = "measuru"
+    val description = "Measure everything!"
+    val scalaVersion = "2.10.2"
+    val organization = "com.measuru"
     val version = "1.0-SNAPSHOT"
-    val homepage = Some(new URL("http://github.com/brewpot/brewpot"))
-    val startYear = Some(2012)
+    val homepage = Some(new URL("http://github.com/kareblak/measuru"))
+    val startYear = Some(2013)
     val licenses = Seq(("Apache 2", new URL("http://www.apache.org/licenses/LICENSE-2.0.txt")))
   }
 
@@ -41,9 +40,10 @@ object Build extends Build {
       "typesafe repo" at "http://repo.typesafe.com/typesafe/releases/"
     )
     val libraryDependencies = Seq(
-      "net.databinder" %% "unfiltered" % "0.6.8",
-      "net.databinder" %% "unfiltered-filter" % "0.6.8",
-              "net.databinder" %% "unfiltered-netty" % "0.6.8"
+      "net.databinder" %% "unfiltered"            % "0.6.8",
+      "net.databinder" %% "unfiltered-filter"     % "0.6.8",
+      "net.databinder" %% "unfiltered-jetty"      % "0.6.8",
+      "net.databinder" %% "unfiltered-directives" % "0.6.8"
     )
   }
 }
