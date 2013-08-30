@@ -1,12 +1,12 @@
 import sbt._
 import sbt.Keys._
 import scala.Some
-import com.typesafe.sbt.SbtStartScript
+import com.typesafe.startscript.StartScriptPlugin
 
 object Build extends Build {
 
   lazy val root = Project(
-    id = "brewpot",
+    id = "measuru",
     base = file("."),
     settings = Defaults.defaultSettings ++
       Seq(
@@ -20,7 +20,7 @@ object Build extends Build {
         libraryDependencies ++= External.libraryDependencies,
         resolvers           ++= External.resolvers
     )
-    ++ seq(SbtStartScript.startScriptForClassesSettings: _*)
+    ++ seq(StartScriptPlugin.startScriptForClassesSettings: _*)
   )
 
   object Settings {
@@ -43,7 +43,8 @@ object Build extends Build {
       "net.databinder" %% "unfiltered"            % "0.6.8",
       "net.databinder" %% "unfiltered-filter"     % "0.6.8",
       "net.databinder" %% "unfiltered-jetty"      % "0.6.8",
-      "net.databinder" %% "unfiltered-directives" % "0.6.8"
+      "net.databinder" %% "unfiltered-directives" % "0.6.8",
+      "net.databinder" %% "dispatch-oauth"        % "0.8.9"
     )
   }
 }
