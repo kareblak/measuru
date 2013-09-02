@@ -44,7 +44,9 @@ object Build extends Build {
       "net.databinder" %% "unfiltered-filter"     % "0.6.8",
       "net.databinder" %% "unfiltered-jetty"      % "0.6.8",
       "net.databinder" %% "unfiltered-directives" % "0.6.8",
-      "net.databinder" %% "dispatch-oauth"        % "0.8.9"
+      "net.databinder" %% "dispatch-oauth"        % "0.8.9",
+      "org.mongodb"    %% "casbah"                % "2.6.2",
+      "com.jteigen"    %% "linx"                  % "0.1"
     )
   }
 }

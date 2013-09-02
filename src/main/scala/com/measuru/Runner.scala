@@ -5,7 +5,7 @@ import java.io.File
 
 object Runner extends App {
 
-  val port = Properties.envOrElse("PORT", "8889").toInt
+  val port = Properties.envOrElse("PORT", "8888").toInt
 
   unfiltered.jetty.Http(port)
     .plan(Guide)

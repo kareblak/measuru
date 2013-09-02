@@ -2,21 +2,35 @@ package com.measuru
 
 import unfiltered.response.Html5
 import scala.xml.{Unparsed, NodeSeq}
+import java.util.Date
+import java.text.{SimpleDateFormat, DateFormat}
+import com.measuru.Director.Series
 
 object Showgirl {
 
-  def series(unit: String) = bootstrap {
+  def series(series: Series) = bootstrap {
     <p class="lead">
-      Series with unit <b>{ unit }</b>. Register new values here.
+      Series with unit <b>{ series.unit }</b>. Register new values here.
     </p>
-    <form class="form-inline" action="measurement" method="post">
-      <input type="hidden" name="unit" value={ unit }/>
+    <form class="form-inline" action={ s"${series.id}" } method="post">
+      { series.measurements.map { measurement =>
+        <p>
+          <div class="input-append">
+            <input id="v1" class="span1" type="text" placeholder={ measurement.value.toString } readonly=""/>
+            <span class="add-on">{ series.unit }</span>
+          </div>
+          <div class="input-append" id="dp1" data-date={ format(measurement.date) } data-date-format={ dateFormat }>
+            <input class="span1" size="16" type="text" value={ format(measurement.date) } readonly=""/>
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </p>
+      } }
       <div class="input-append">
-        <input class="span1" type="text" name="measure" placeholder="n"/>
-        <span class="add-on">{ unit }</span>
+        <input class="span1" type="text" name="value"/>
+        <span class="add-on">{ series.unit }</span>
       </div>
-      <div class="input-append" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-        <input class="span1" size="16" type="text" value="12-02-2012"/>
+      <div class="input-append" id="date" data-date="01-01-01" data-date-format="dd-mm-yy">
+        <input name="date" class="span1" size="16" type="text" value="01-01-01"/>
         <span class="add-on"><i class="icon-calendar"></i></span>
       </div>
       <button type="submit" class="btn"><i class="icon-plus-sign"></i></button>
@@ -54,5 +68,11 @@ object Showgirl {
       <script src="/js/datepicker-setup.js"></script>
     </body>
   }
+
+  private lazy val dateFormat = "dd-MM-yy"
+  lazy val sdf = new SimpleDateFormat(dateFormat)
+
+  private def today = format(new Date())
+  private def format(d: Date) = sdf.format(d)
 
 }

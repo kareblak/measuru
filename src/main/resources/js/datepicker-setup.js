@@ -1,4 +1,4 @@
 $(function() {
-  $('#dp1').datepicker();
-  $('#dp1').datepicker('setDate', new Date());
+  $('#date').datepicker({weekStart: 1, dateFormat: "dd-mm-yy"});
+  $('#date').datepicker('setValue', new Date());
 });
